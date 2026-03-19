@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🐷 猜生肖小测试 | JavaScript 版</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 40px 60px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #6a11cb;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1em;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #6a11cb;
+      color: white;
+      padding: 12px 40px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #540eaa;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #d43c7f;
+      min-height: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎉 猜生肖小测试</h1>
+  <p>输入出生年份，看看你的生肖是哪个？</p>
+
+  <label for="year">请输入年份（如：1990）：</label>
+  <input type="number" id="year" placeholder="例如：1990" />
+
+  <button onclick="calculateZodiac()">确定</button>
+
+  <div id="result"></div>
+</div>
+
+<script>
+  // 生肖列表（2000年是“鼠年”为基准）
+  const zodiacs = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
+
+  function calculateZodiac() {
+    const yearInput = document.getElementById("year").value.trim();
+
+    if (!yearInput) {
+      alert("请输入年份！");
+      return;
+    }
+
+    const year = parseInt(yearInput);
+
+    // 检查是否是有效年份（比如 1000 ~ 3000）
+    if (isNaN(year) || year < 1000 || year > 3000) {
+      alert("请输入一个有效的年份（例如：1990）");
+      return;
+    }
+
+    // 计算生肖（以 2000 年为“鼠”）
+    const offset = (year - 2000) % 12;
+    const zodiac = zodiacs[offset];
+
+    // 显示结果
+    document.getElementById("result").innerHTML = `✅ 你的生肖是：<span style="color: #d43c7f;">${zodiac}</span>`;
+  }
+</script>
+
+</body>
+</html>
